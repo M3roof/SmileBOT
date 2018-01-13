@@ -110,4 +110,60 @@ bot.on("message", function(message) {
     }
 });
 
+if(command === `${prefix}kick`) {
+    let raison = message.content.substr(26);
+    let kickMember = message.guild.member(message.mentions.users.first());
+    if(!message.member.hasPermissions("KICK_MEMBERS")){
+        message.channel.send(`:tools: | ${message.author} Tu n'as pas la permission d'expulser les membres.`)
+        return;
+    }else{
+        if(!kickMember){
+            message.channel.send(`:tools: | ${message.author} veuillez mentionner un utilisateur.`)
+            return;
+      }else{
+          if(!kickMember.bannable){
+              message.channel.send(`:tools: | ${message.author} tu ne peux pas expulser cet utilisateur.`)
+              return;
+        }else{
+            if(kickMember.hasPermission("ADMINISTRATOR")){
+                message.channel.send(`:tools: | ${message.author} cet utilisateur est un admin, tu ne peux pas faire ça.`)
+                return;
+            }else{
+    message.delete(message.author);
+    message.guild.member(kickMember).kick({reason: `${raison}`});
+    message.channel.sendMessage(`:tools: | ${kickMember} a été kick ! raison:${raison}`);
+            }
+        }
+    }
+}
+}
+
+if(command === `${prefix}ban`) {
+    let raison = message.content.substr(26);
+    let banMember = message.guild.member(message.mentions.users.first());
+    if(!message.member.hasPermissions("BAN_MEMBERS")){
+        message.channel.send(`:tools: | ${message.author} Tu n'as pas la permission de bannir les membres.`)
+        return;
+    }else{
+        if(!banMember){
+            message.channel.send(`:tools: | ${message.author} veuillez mentionner un utilisateur.`)
+            return;
+      }else{
+          if(!banMember.bannable){
+              message.channel.send(`:tools: | ${message.author} tu ne peux pas bannir cet utilisateur.`)
+              return;
+        }else{
+            if(banMember.hasPermission("ADMINISTRATOR")){
+                message.channel.send(`:tools: | ${message.author} cet utilisateur est un admin, tu ne peux pas faire ça.`)
+                return;
+            }else{
+    message.delete(message.author);
+    message.guild.member(banMember).ban({reason: `${raison}`});
+    message.channel.sendMessage(`:tools: | ${banMember} a été banni ! raison:${raison}`);
+            }
+        }
+    }
+}
+}
+
 bot.login(TOKEN);
