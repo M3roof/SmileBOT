@@ -135,4 +135,4 @@ bot.on("message", function(message) {
     }
   });
 
-bot.login(TOKEN);
+bot.login(process.env.TOKEN);
