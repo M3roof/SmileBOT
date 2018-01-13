@@ -33,6 +33,13 @@ bot.on('ready', () => {
         console.log("Ready");
         });
 
+bot.on('ready', () => {
+    bot.user.setPresence({ status: 'Online', game: {
+        name: "s!help",
+        type: 3,
+        url: "discordapp.com"      
+    }})
+});
 
 bot.on("guildMemberAdd", function(member) {
     member.guild.channels.find("name", "general").sendMessage(member.toString() + " Bienvenue sur le serveur !");
