@@ -30,6 +30,7 @@ var bot = new Discord.Client();
 var servers = {};
 
 bot.on('ready', () => {
+    bot.user.setPresence({ game: { name: 's!help | By Smile', type: 0}});
     console.log("Ready");
 })
 
