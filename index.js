@@ -29,14 +29,6 @@ var bot = new Discord.Client();
 
 var servers = {};
 
-bot.on('ready', () => { 
-    bot.user.setPresence({ status: 'Online', game: {
-        name: "s!help",
-        type: 3,
-        url: "discordapp.com"      
-    }})
-});
-
 bot.on('ready', () => {
     console.log("Ready");
 })
@@ -112,30 +104,6 @@ bot.on("message", function(message) {
 
             if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
             break;
-        case "kick":
-            if (message.content === "s!kick") {
-            let modRole = message.guild.roles.find("name", "Administrateurs");
-            if(message.member.roles.has(modRole.id)) { 
-              let kickMember = message.guild.member(message.mentions.users.first());
-              message.guild.member(kickMember).kick();
-              message.channel.sendMessage("Membre kick !");
-            } else {
-              return message.reply("Tu n'as pas la permission de kick.");
-            }
-          }
-          break;
-          case "ban":
-          if (message.content === "s!ban") {
-            let modRole = message.guild.roles.find("name", "Administrateurs");
-            if(message.member.roles.has(modRole.id)) { 
-              let banMember = message.guild.member(message.mentions.users.first());
-              message.guild.member(banMember).ban();
-              message.channel.sendMessage("Membre banni");
-            } else {
-              return message.reply("Tu n'as pas la permission de ban.");
-            }
-          }
-          break;
         default:
             message.channel.sendMessage("Commande incorrect");
     }
