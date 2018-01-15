@@ -67,7 +67,7 @@ bot.on("message", function(message) {
 
     if (party_launch && message.content != null){
 
-        if(Number.isInteger(parseInt(command))) {
+        if(Number.isInteger(parseInt(message.content))) {
 
             if (message.content > number_random) {
 
