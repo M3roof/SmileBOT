@@ -54,7 +54,7 @@ bot.on("message", function(message) {
 
     var party_launch = false;
 
-    if (command === `${PREFIX}guess-number-start`){
+    if (message.content == `${PREFIX}guess-number-start`){
 
         message.reply("Partie lancée !")
 
@@ -65,17 +65,17 @@ bot.on("message", function(message) {
         console.log(number_random);
     }
 
-    if (party_launch && command != null){
+    if (party_launch && message.content != null){
 
-        if(Number.isInteger(parseInt(command))) {
+        if(Number.isInteger(parseInt(message.content))) {
 
-            if (command > number_random) {
+            if (message.content > number_random) {
 
                 message.reply("Plus petit !")
 
             }
 
-            else if(command < number_random) {
+            else if(message.content < number_random) {
 
                 message.reply("Plus grand !")
 
@@ -91,7 +91,7 @@ bot.on("message", function(message) {
         }
     }
 
-    if (command === `${PREFIX}guess-number-stop`){
+    if (message.content == `${PREFIX}guess-number-stop`){
         
         if(party_launch == true){
             message.reply("Partie stoppée !")
