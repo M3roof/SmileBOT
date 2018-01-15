@@ -29,10 +29,6 @@ var bot = new Discord.Client();
 
 var servers = {};
 
-var number_random = 0;
-
-var party_launch = false;
-
 bot.on('ready', () => {
     bot.user.setPresence({ game: { name: 's!help | By Smile', type: 0}});
     console.log("Ready");
@@ -54,7 +50,11 @@ bot.on("message", function(message) {
 
     var args = message.content.substring(PREFIX.length).split(" ");
 
-    if (command === `${PREFIX}guess-number start`){
+    var number_random = 0;
+
+    var party_launch = false;
+
+    if (command === `${PREFIX}guess-number-start`){
 
         message.reply("Partie lancée !")
 
@@ -80,7 +80,7 @@ bot.on("message", function(message) {
         }
     }
 
-    if (command === `${PREFIX}guess-number stop`){
+    if (command === `${PREFIX}guess-number-stop`){
         
         if(party_launch == true){
             message.reply("Partie stoppée !")
