@@ -66,16 +66,27 @@ bot.on("message", function(message) {
     }
 
     if (party_launch && message.content != null){
-        if(Number.isInteger(parseInt(message.content))) {
-            if (message.content > number_random) {
+
+        if(Number.isInteger(parseInt(command))) {
+
+            if (command > number_random) {
+
                 message.reply("Plus petit !")
+
             }
-            else if(message.content < number_random) {
+
+            else if(command < number_random) {
+
                 message.reply("Plus grand !")
+
             }
+
             else {
+
                 message.reply("à gagné la partie !");
+
                 party_launch = false;
+
             }
         }
     }
