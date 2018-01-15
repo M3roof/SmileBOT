@@ -29,12 +29,17 @@ var bot = new Discord.Client();
 
 var servers = {};
 
+var number_random = 0;
+
+var party_launch = false;
+
 bot.on('ready', () => {
     bot.user.setPresence({ game: { name: 's!help | By Smile', type: 0}});
     console.log("Ready");
 })
 
 bot.on("guildMemberAdd", function(member) {
+    let guild = member.guild;
     member.guild.channels.find("name", "general").sendMessage(member.toString() + " Bienvenue sur le serveur !");
 
     member.addRole(member.guild.roles.find("name", "Invité temporaire"))
@@ -48,6 +53,42 @@ bot.on("message", function(message) {
     var command = message.content.split(' ')[0].toLowerCase();
 
     var args = message.content.substring(PREFIX.length).split(" ");
+
+    if (command === `${PREFIX}guess-number start`){
+
+        message.reply("Partie lancée !")
+
+        party_launch = true;
+
+        number_random = Math.floor(Math.random() *  (5000 - 0) +0)
+
+        console.log(number_random);
+    }
+
+    if (party_launch && message.content != null){
+        if(Number.isInteger(parseInt(message.content))) {
+            if (message.content > number_random) {
+                message.reply("Plus petit !")
+            }
+            else if(message.content < number_random) {
+                message.reply("Plus grand !")
+            }
+            else {
+                message.reply("à gagné la partie !");
+                party_launch = false;
+            }
+        }
+    }
+
+    if (command === `${PREFIX}guess-number stop`){
+        
+        if(party_launch == true){
+            message.reply("Partie stoppée !")
+            party_launch = false;
+        } else {
+            message.reply("Il n'y a pas de partie en cours !")
+            }
+        }
 
     if (command === `${PREFIX}cookie`){
         let usermention = message.mentions.users.first();
